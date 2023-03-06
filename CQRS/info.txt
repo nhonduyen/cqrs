@@ -1,0 +1,3 @@
+﻿https://www.telerik.com/blogs/applying-cqrs-pattern-aspnet-core-application
+
+https://github.com/iammukeshm/CQRS.WebApi
