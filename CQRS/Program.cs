@@ -1,5 +1,7 @@
 using CQRS.Infrastructure.Data;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +15,7 @@ builder.Services.AddDbContext<ProductDBContext>(option =>
 {
     option.UseSqlServer(builder.Configuration.GetConnectionString("ProductConnection"), providerOptions => providerOptions.CommandTimeout(120));
 });
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(Assembly.GetExecutingAssembly()));
 
 var app = builder.Build();
 
@@ -28,5 +31,6 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
