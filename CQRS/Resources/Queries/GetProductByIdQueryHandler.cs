@@ -16,7 +16,7 @@ namespace CQRS.Resources.Queries
 
         public async Task<Product> Handle(GetProductByIdQuery request, CancellationToken cancellationToken)
         {
-            var product = await _context.Products.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
+            var product = await _context.Products.AsNoTracking().FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
             return product;
         }
     }

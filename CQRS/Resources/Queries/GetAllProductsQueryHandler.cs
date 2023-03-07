@@ -15,7 +15,7 @@ namespace CQRS.Resources.Queries
 
         public async Task<IEnumerable<Product>> Handle(GetAllProductsQuery request, CancellationToken cancellationToken)
         {
-            var products = await _context.Products.ToListAsync();
+            var products = await _context.Products.AsNoTracking().ToListAsync();
             return products;
         }
     }
